@@ -1,7 +1,6 @@
 # Simple Gulp for Sass "7 in 1 architecture"
 
 1. git clone https://github.com/gkntfrontend/gulp-sass-7in1.git
-
 2.npm install
 
 ## Fast foldering ( needs bash* )
