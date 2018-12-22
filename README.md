@@ -1,5 +1,8 @@
 # Simple Gulp for Sass "7 in 1 architecture"
 
+1. git clone https://github.com/gkntfrontend/gulp-sass-7in1.git
+2.npm install
+
 ## Fast foldering ( needs bash* )
 
 ↳ src
@@ -11,23 +14,23 @@
 
 ### Git Bash Comments
 
-Create "styles" folder and put "sass" folder inside "styles"
+__Create "styles" folder and put "sass" folder inside "styles"__
 ```
 cd src && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
 ```
-_*if there is no src*_;
+__*if there is no src*__;
 ```
 mkdir src && cd src && mkdir assets && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
 ```
-_*if there is no assets*_;
+__*if there is no assets*__;
 ```
 cd src && mkdir assets && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
 ```
-_*Create "main.scss" file and 7/1 SASS architecture folders*_
+__Create "main.scss" file and 7/1 SASS architecture folders__
 ```
 touch main.scss && mkdir abstracts vendors base components layout pages themes
 ```
-_*Create all the subfolders and SCSS files*_
+__Create all the subfolders and SCSS files__
 ```
 cd abstracts && touch _variables.scss _mixins.scss _functions.scss _placeholders.scss && cd ..
 
@@ -43,7 +46,7 @@ cd themes && touch _dark.scss && cd ..
 
 cd vendors && touch _bootstrap.scss && cd ..
 ```
-main.scss:
+__main.scss:__
 ```
 @charset 'UTF-8';
 
@@ -113,11 +116,11 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./src/assets/styles/css'));
 });
 
-gulp.task('watch', function () {
+gulp.task('sass:watch', function () {
   gulp.watch('./src/assets/styles/sass/**/*.scss', gulp.series('sass'));
 });
 ```
 
-### gulp sass
+> ```gulp sass```   
 
-### gulp sass:watch
+> ```gulp sass:watch``` 
