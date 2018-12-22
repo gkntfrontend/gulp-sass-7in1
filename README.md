@@ -119,7 +119,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./src/assets/styles/css'));
 });
 
-+
+++
 gulp.task('sass:nano', function () {
   return gulp.src('./src/assets/styles/sass/main.scss')
     .pipe(sass({
@@ -132,7 +132,7 @@ gulp.task('sass:nano', function () {
     .pipe(concat('main.nano.css'))
     .pipe(gulp.dest('./src/assets/styles/css'));
 });
-+
+++
 
 gulp.task('sass:watch', function () {
   gulp.watch('./src/assets/styles/sass/**/*.scss', gulp.series('sass'));
