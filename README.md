@@ -16,15 +16,7 @@
 
 __Create "styles" folder and put "sass" folder inside "styles"__
 ```
-cd src && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
-```
-__*if there is no src*__;
-```
-mkdir src && cd src && mkdir assets && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
-```
-__*if there is no assets*__;
-```
-cd src && mkdir assets && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
+$ mkdir src && cd src && mkdir assets && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
 ```
 __Create "main.scss" file and 7/1 SASS architecture folders__
 ```
