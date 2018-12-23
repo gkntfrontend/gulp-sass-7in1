@@ -1,28 +1,30 @@
 # Simple Gulp for Sass "7 in 1 architecture"
+1. git clone https://github.com/gkntfrontend/gulp-sass-7in1.git   
+2. npm install
 
-1. git clone https://github.com/gkntfrontend/gulp-sass-7in1.git
-2.npm install
-
-## Fast foldering ( needs bash* )
+## Fast foldering ( needs git bash* )
 
 ↳ src
-  ↳ assets
-    ↳ styles
-      ↳ sass
-        ⤏ main.scss
-        ⤏ subfolders (abstracts, vendors, base, layout, components, pages, themes)
+    ↳ assets 
+        ↳ styles
+            ↳ sass
+                ⤏ main.scss
+                ⤏ subfolders (abstracts, vendors, base, layout, components, pages, themes)
 
-### Git Bash Comments
+### Git Bash Commands
 
-__Create "styles" folder and put "sass" folder inside "styles"__
+*I've changed the previous commit to let you use commands below directly*
+
+__⤏ Create folder structure and put empty "sass" folder inside "styles"__  
+
 ```
 mkdir src && cd src && mkdir assets && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
 ```
-__Create "main.scss" file and 7/1 SASS architecture folders__
+__⤏ Create "main.scss" file and 7/1 SASS architecture folders__
 ```
 touch main.scss && mkdir abstracts vendors base components layout pages themes
 ```
-__Create all the subfolders and SCSS files__
+__⤏ Create all the subfolders and SCSS files__
 ```
 cd abstracts && touch _variables.scss _mixins.scss _functions.scss _placeholders.scss && cd ..
 
@@ -38,7 +40,7 @@ cd themes && touch _dark.scss && cd ..
 
 cd vendors && touch _bootstrap.scss && cd ..
 ```
-__main.scss:__
+__⤏ main.scss:__
 ```
 @charset 'UTF-8';
 
@@ -59,8 +61,8 @@ __main.scss:__
 
 @import
       'base/normalize',
-      'base/typography',
-      'base/base';
+      'base/base',
+      'base/typography';
 
 // 4. Layout-related sections
 
@@ -88,15 +90,15 @@ __main.scss:__
       'themes/dark';
 ```
 
-## gulpfile.js ( + for 2nd commit )
+## gulpfile.js
 ```javascript
 'use strict';
 
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
-+ const cssnano = require('gulp-cssnano');
-+ const concat = require('gulp-concat');
+const cssnano = require('gulp-cssnano');
+const concat = require('gulp-concat');
 sass.compiler = require('node-sass');
 
 gulp.task('sass', function () {
@@ -107,11 +109,10 @@ gulp.task('sass', function () {
     .pipe(autoprefixer({
       browsers: ['last 2 versions']
     }))
-    + .pipe(concat('main.css'))
+    .pipe(concat('main.css'))
     .pipe(gulp.dest('./src/assets/styles/css'));
 });
 
-++
 gulp.task('sass:nano', function () {
   return gulp.src('./src/assets/styles/sass/main.scss')
     .pipe(sass({
@@ -124,15 +125,16 @@ gulp.task('sass:nano', function () {
     .pipe(concat('main.nano.css'))
     .pipe(gulp.dest('./src/assets/styles/css'));
 });
-++
 
 gulp.task('sass:watch', function () {
   gulp.watch('./src/assets/styles/sass/**/*.scss', gulp.series('sass'));
 });
 ```
 
-> ```gulp sass```   
+### Terminal Commands
 
-> ```gulp sass:watch``` 
+```gulp sass```   
 
-> ```gulp sass:nano``` 
+```gulp sass:nano``` 
+
+```gulp sass:watch``` 
