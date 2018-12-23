@@ -73,7 +73,7 @@ __main.scss:__
 
 @import
       'components/links',
-      'components/
+      'components/buttons',
       'components/navbar';
 
 // 6. Page-specific styles
