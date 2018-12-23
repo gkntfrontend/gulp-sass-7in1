@@ -2,6 +2,8 @@
 1. git clone https://github.com/gkntfrontend/gulp-sass-7in1.git   
 2. npm install
 
+* https://youtu.be/K3D-b4eBvlA *
+
 ## Fast foldering ( needs git bash* )
 
 ↳ src
