@@ -1,32 +1,37 @@
 # Simple Gulp for Sass "7 in 1 architecture"
-1. git clone https://github.com/gkntfrontend/gulp-sass-7in1.git   
+
+1. git clone https://github.com/gkntfrontend/gulp-sass-7in1.git
 2. npm install
 
-* https://youtu.be/K3D-b4eBvlA *
+- Demo: https://youtu.be/K3D-b4eBvlA \*
 
-## Fast foldering ( needs git bash* )
+## Fast foldering ( needs git bash\* )
 
 ↳ src
-    ↳ assets 
-        ↳ styles
-            ↳ sass
-                ⤏ main.scss
-                ⤏ subfolders (abstracts, vendors, base, layout, components, pages, themes)
+↳ assets
+↳ styles
+↳ sass
+⤏ main.scss
+⤏ subfolders (abstracts, vendors, base, layout, components, pages, themes)
 
 ### Git Bash Commands
 
-*I've changed the previous commit to let you use commands below directly*
+_I changed the previous commit to let you use commands below directly_
 
-__⤏ Create folder structure and put empty "sass" folder inside "styles"__  
+**⤏ Create folder structure and put empty "sass" folder inside "styles"**
 
 ```
 mkdir src && cd src && mkdir assets && cd assets && mkdir styles && cd styles && mkdir sass && cd sass
 ```
-__⤏ Create "main.scss" file and 7/1 SASS architecture folders__
+
+**⤏ Create "main.scss" file and 7/1 SASS architecture folders**
+
 ```
 touch main.scss && mkdir abstracts vendors base components layout pages themes
 ```
-__⤏ Create all the subfolders and SCSS files__
+
+**⤏ Create all the subfolders and SCSS files**
+
 ```
 cd abstracts && touch _variables.scss _mixins.scss _functions.scss _placeholders.scss && cd ..
 
@@ -42,7 +47,9 @@ cd themes && touch _dark.scss && cd ..
 
 cd vendors && touch _bootstrap.scss && cd ..
 ```
-__⤏ main.scss:__
+
+**⤏ main.scss:**
+
 ```
 @charset 'UTF-8';
 
@@ -93,50 +100,65 @@ __⤏ main.scss:__
 ```
 
 ## gulpfile.js
+
 ```javascript
-'use strict';
+"use strict";
 
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
-const cssnano = require('gulp-cssnano');
-const concat = require('gulp-concat');
-sass.compiler = require('node-sass');
+const gulp = require("gulp");
+const sass = require("gulp-sass");
+const autoprefixer = require("gulp-autoprefixer");
+const cssnano = require("gulp-cssnano");
+const concat = require("gulp-concat");
+sass.compiler = require("node-sass");
 
-gulp.task('sass', function () {
-  return gulp.src('./src/assets/styles/sass/main.scss')
-    .pipe(sass({
-      outputStyle: 'compact'
-    }).on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions']
-    }))
-    .pipe(concat('main.css'))
-    .pipe(gulp.dest('./src/assets/styles/css'));
+const sassPaths = {
+  src: "./src/assets/styles/sass/**/*.scss",
+  main: "./src/assets/styles/sass/*.scss",
+  dest: "./src/assets/styles/css",
+  concatCss: "main.css",
+  concatNano: "main.nano.css"
+};
+
+gulp.task("sass", () => {
+  return gulp
+    .src(`${sassPaths.main}`)
+    .pipe(
+      sass({
+        outputStyle: "compact"
+      }).on("error", sass.logError)
+    )
+    .pipe(
+      autoprefixer({
+        browsers: ["last 2 versions"]
+      })
+    )
+    .pipe(concat(`${sassPaths.concatCss}`))
+    .pipe(gulp.dest(`${sassPaths.dest}`));
 });
 
-gulp.task('sass:nano', function () {
-  return gulp.src('./src/assets/styles/sass/main.scss')
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }).on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions']
-    }))
+gulp.task("sass:nano", () => {
+  return gulp
+    .src(`${sassPaths.main}`)
+    .pipe(sass({}).on("error", sass.logError))
+    .pipe(
+      autoprefixer({
+        browsers: ["last 2 versions"]
+      })
+    )
     .pipe(cssnano())
-    .pipe(concat('main.nano.css'))
-    .pipe(gulp.dest('./src/assets/styles/css'));
+    .pipe(concat("main.nano.css"))
+    .pipe(gulp.dest(`${sassPaths.dest}`));
 });
 
-gulp.task('sass:watch', function () {
-  gulp.watch('./src/assets/styles/sass/**/*.scss', gulp.series('sass'));
+gulp.task("sass:watch", () => {
+  gulp.watch(`${sassPaths.src}`, gulp.series("sass"));
 });
 ```
 
 ### Terminal Commands
 
-```gulp sass```   
+`gulp sass`
 
-```gulp sass:nano``` 
+`gulp sass:nano`
 
-```gulp sass:watch``` 
+`gulp sass:watch`

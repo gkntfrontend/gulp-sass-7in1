@@ -7,31 +7,45 @@ const cssnano = require("gulp-cssnano");
 const concat = require("gulp-concat");
 sass.compiler = require("node-sass");
 
-gulp.task("sass", function () {
-	return gulp.src("./src/assets/styles/sass/main.scss")
-		.pipe(sass({
-			outputStyle: "compact"
-		}).on("error", sass.logError))
-		.pipe(autoprefixer({
-			browsers: ["last 2 versions"]
-		}))
-		.pipe(concat("main.css"))
-		.pipe(gulp.dest("./src/assets/styles/css"));
+const sassPaths = {
+	src: "./src/assets/styles/sass/**/*.scss",
+	main: "./src/assets/styles/sass/*.scss",
+	dest: "./src/assets/styles/css",
+	concatCss: "main.css",
+	concatNano: "main.nano.css"
+};
+
+gulp.task("sass", () => {
+	return gulp
+		.src(`${sassPaths.main}`)
+		.pipe(
+			sass({
+				outputStyle: "compact"
+			}).on("error", sass.logError)
+		)
+		.pipe(
+			autoprefixer({
+				browsers: ["last 2 versions"]
+			})
+		)
+		.pipe(concat(`${sassPaths.concatCss}`))
+		.pipe(gulp.dest(`${sassPaths.dest}`));
 });
 
-gulp.task("sass:nano", function () {
-	return gulp.src("./src/assets/styles/sass/main.scss")
-		.pipe(sass({
-			outputStyle: "expanded"
-		}).on("error", sass.logError))
-		.pipe(autoprefixer({
-			browsers: ["last 2 versions"]
-		}))
+gulp.task("sass:nano", () => {
+	return gulp
+		.src(`${sassPaths.main}`)
+		.pipe(sass({}).on("error", sass.logError))
+		.pipe(
+			autoprefixer({
+				browsers: ["last 2 versions"]
+			})
+		)
 		.pipe(cssnano())
 		.pipe(concat("main.nano.css"))
-		.pipe(gulp.dest("./src/assets/styles/css"));
+		.pipe(gulp.dest(`${sassPaths.dest}`));
 });
 
-gulp.task("sass:watch", function () {
-	gulp.watch("./src/assets/styles/sass/**/*.scss", gulp.series("sass"));
+gulp.task("sass:watch", () => {
+	gulp.watch(`${sassPaths.src}`, gulp.series("sass"));
 });
