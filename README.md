@@ -1,6 +1,6 @@
 # Simple Gulp for Sass "7 in 1 architecture"
 
-1. git clone https://github.com/gokhantaskan/gulp-sass-7in1
+1. git clone https://github.com/gokhantaskan/gulp-sass-7in1.git
 2. npm install
 
 - Demo: https://youtu.be/K3D-b4eBvlA
