@@ -46,8 +46,6 @@ cd pages && touch _home.scss _about.scss && cd ..
 cd themes && touch _dark.scss && cd ..
 
 cd vendors && touch _bootstrap.scss && cd ..
-
-cd .. && cd .. && cd .. && cd ..
 ```
 
 **⤏ Go back to the main directory**
